@@ -1,99 +1,81 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, Component } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
-  Button,
-  Modal,
-  SafeAreaView,
-  Linking,
-  ScrollView,
-  useColorScheme,
-  Appearance,
 } from "react-native";
 
-import styles from "./style";
+import styles from './style';
+import PhoneInput from 'react-native-phone-number-input';
 
-import CheckBox from "@react-native-community/checkbox";
 
-export default function Register({ navigation }) {
+export default function Register() {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [complianceModal, setComplianceModal] = useState(true);
-  const [text, onChangeText] = React.useState();
-  const [number, onChangeNumber] = React.useState(null);
+    const [complianceModal, setComplianceModal] = useState(true);
+    const [text, onChangeText] = React.useState();
 
-  return (
-    <View styles={styles.maincontainer}>
-      <View>
-        <Text style={styles.info}>
-          Bharat-Indx will send a verification code by SMS to your mobile
-          number.Carrier charges may apply
-        </Text>
-        <Text style={styles.info2}>
-          Please enter your country and enter your mobile number.
-        </Text>
-      </View>
+    const [value, setValue] = useState('');
+    const [formattedValue, setFormattedValue] = useState('');
+    const phoneInput = useRef(PhoneInput);
+
+    return (
+        <View styles={styles.maincontainer}>
+        <View>
+          <Text style={styles.text}>
+            Sipto will send a verification code by SMS to your mobile
+            number.Carrier charges may apply
+          </Text>
+        </View>
+
+
+        <View style={styles.inputView}>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              placeholder="Enter your Name"
+              placeholderTextColor="lightgrey"
+              onChangeText={onChangeText}
+              value={text}
+            />
+         </View>
 
       <View style={styles.bottomView}>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your Name"
-            autoCapitalize="none"
-            placeholderTextColor="grey"
-            onChangeNumber={onChangeNumber}
-            value={number}
-          />
+        <PhoneInput
+           style={styles.phonebox}
+           containerStyle={{height:70,backgroundColor:'grey',}}
+           textContainerStyle={{backgroundColor:'grey'}}
+           textInputStyle={{fontSize:16,padding:0,color:'black',fontWeight:'500',}}
+           ref={phoneInput}
+           defaultValue={value}
+           autoFormate={'true'}
+           defaultCode="IN"
+           layout="first"
+           onChangeText={(text) => {
+             setValue(text);
+           }}
+           onChangeFormattedText={(text) => {
+             setFormattedValue(text);
+           }}
+           countryPickerProps={{ withAlphaFilter: true }}
+           withShadow
+           autoFocus
+
+         />
         </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            placeholder="Enter your Country Name"
-            placeholderTextColor="grey"
-            onChangeText={onChangeText}
-            value={text}
-          />
-        </View>
+         <View style={styles.inputView}>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              placeholder="Enter your Password"
+              placeholderTextColor="lightgrey"
+              onChangeText={onChangeText}
+              value={text}
+            />
+         </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            placeholder="Enter your Phone Number"
-            placeholderTextColor="grey"
-            onChangeText={onChangeText}
-            value={text}
-            keyboardType="numeric"
-          />
         </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            placeholder="Enter your Password"
-            placeholderTextColor="grey"
-            onChangeText={onChangeText}
-            value={text}
-          />
-        </View>
-
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            placeholder="Enter your Password again"
-            placeholderTextColor="grey"
-            onChangeText={onChangeText}
-            value={text}
-          />
-        </View>
-      </View>
-    </View>
   );
 }

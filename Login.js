@@ -1,67 +1,80 @@
 /* eslint-disable prettier/prettier */
-import React , {useState,Component} from 'react';
+import React , {useState, useRef} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   Button,
-  Modal,
-  SafeAreaView,
-  Linking,
-  ScrollView,
-  useColorScheme,
-  Appearance,
+  requireNativeComponent,
 } from 'react-native';
 
 import styles from './style';
+import PhoneInput from 'react-native-phone-number-input';
 
-function Login( {navigation} ) {
+export default function Login( {navigation} ) {
 
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [complianceModal, setComplianceModal] = useState(true);
-  const [text, onChangeText] = React.useState();
+    const [toggleCheckBox, setToggleCheckBox] = useState(false);
+    const [complianceModal, setComplianceModal] = useState(true);
+    const [text, onChangeText] = React.useState();
+    const [value, setValue] = useState('');
+    const [formattedValue, setFormattedValue] = useState('');
+    const phoneInput = useRef(PhoneInput);
 
-  const [number, onChangeNumber] = React.useState(null); 
-    return(
+    return (
         <View styles={styles.maincontainer}>
         <View>
-          <Text style={styles.info}>
-            Bharat-Indx will send a verification code by SMS to your mobile
+          <Text style={styles.text}>
+            Sipto will send a verification code by SMS to your mobile
             number.Carrier charges may apply
           </Text>
-          <Text style={styles.info2}>
-            Please enter your country and enter your mobile number.
+          <Text style={styles.text2}>
+            Please select your country code and enter your mobile number.
           </Text>
         </View>
 
       <View style={styles.bottomView}>
-        <View style={styles.inputView}>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your Number"
-              autoCapitalize="none"
-              placeholderTextColor="grey"
-              onChangeNumber={onChangeNumber}
-              value={number}
-              keyboardType="numeric"
-            />
-          </View>
+        <PhoneInput
+           containerStyle={{height:70,backgroundColor:'grey',}}
+           textContainerStyle={{backgroundColor:'grey'}}
+           textInputStyle={{fontSize:16,padding:0,color:'black',fontWeight:'500',}}
+           ref={phoneInput}
+           defaultValue={value}
+           autoFormate={'true'}
+           defaultCode="IN"
+           layout="first"
+           onChangeText={(text) => {
+             setValue(text);
+           }}
+           onChangeFormattedText={(text) => {
+             setFormattedValue(text);
+           }}
+           countryPickerProps={{ withAlphaFilter: true }}
+           withShadow
+           autoFocus
+
+         />
+
+         <TouchableOpacity
+           style={styles.Otpbutton}
+           onPress={() => {
+             // TODO - send SMS!
+           }}
+         />
+           <Text style={styles.OtpbuttonText}>Sign Up</Text>
+           </View>
 
           <View style={styles.inputView}>
             <TextInput
               style={styles.input}
               autoCapitalize="none"
               placeholder="Enter your Password"
-              placeholderTextColor="grey"
+              placeholderTextColor="lightgrey"
               onChangeText={onChangeText}
               value={text}
             />
-          </View>
+
+         </View>
         </View>
-      </View>
     );
   }
-
-  export default Login
