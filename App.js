@@ -44,10 +44,9 @@ function LoginScreen( {navigation} ) {
   return (
   <View style={styles.maincontainer}>
    <ScrollView>
-    <View style={styles.linkbackground}>
-      <Text style={styles.link}>No account ? <Text style={styles.link1} onPress={()=>navigation.navigate(Register)}> Create your Account!</Text></Text>
-    </View>
+    
     <Login />
+    
     <SafeAreaView style={styles.footer}>
           <View style={styles.checkboxContainer}>
             <CheckBox 
@@ -101,7 +100,7 @@ function RegisterScreen( {navigation} ) {
             onValueChange={(newValue) => setToggleCheckBox(newValue)}
             tintColors={{ true: 'green', false: 'black' }}
              />
-
+ 
           <Text style={styles.agmt}>I agree to <Text style = {styles.link1}
             onPress={() => Linking.openURL('https://yadhuvarshini.wordpress.com')}>Terms and Condition</Text>  and  <Text style = {styles.link1}
             onPress={() => Linking.openURL('https://yadhuvarshini.wordpress.com')}>Privacy policy</Text></Text>
@@ -114,7 +113,7 @@ function RegisterScreen( {navigation} ) {
         disabled={!toggleCheckBox}
         onPress={() => setComplianceModal(false)}
         >
-        <Text style={styles.btntext} onPress={() => navigation.navigate(Phonenumber)}>Register</Text>
+        <Text style={styles.btntext} onPress={() => navigation.navigate()}>Register</Text>
         </TouchableOpacity>
 
         </SafeAreaView>

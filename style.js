@@ -7,6 +7,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffff",
     flex: 1,
     },
+
+    container: {
+      paddingTop:50,
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      
+    },
+
     background: {
       backgroundColor: 'dodgerblue',
       height: 60,
@@ -107,6 +115,7 @@ const styles = StyleSheet.create({
       height: 45,
       borderWidth: 0,
       borderBottomWidth: 1,
+      color: '#000',
     },
 
     underlineStyleHighLighted: {
@@ -152,27 +161,17 @@ const styles = StyleSheet.create({
       alignItems: "flex-start",
       color: "gray",
     },
-    OtpinputView: {
-      height: 60,
-      borderColor: "orange",
-      borderBottomWidth:2,
-      margin:10,
-    },
-    Otpinput: {
-      height: 60,
-      fontFamily: 'SourceSansProRegular',
-      fontSize: 16,
-      color: '#000',
-    },
-    Otpinputflex: {
-      flexDirection: 'row',
-      marginTop:50,
-      marginLeft: 50,
-    },
     Otpborderstyle: {
-      width: 30,
-      height: 45,
+      maxHeight: 100,
+      justifyContent: 'space-evenly',
+      margin:10,
+      PlaceholderTextColor: '#000'
     },
+    
+    Button_otp :  {
+      paddingTop:30,
+    },
+    
   });
 
 export default styles;

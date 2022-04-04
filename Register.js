@@ -12,7 +12,7 @@ import PhoneInput from 'react-native-phone-number-input';
 
 
 export default function Register() {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+    const [toggleCheckBox, setToggleCheckBox] = useState(false);
     const [complianceModal, setComplianceModal] = useState(true);
     const [text, onChangeText] = React.useState();
 
@@ -22,14 +22,6 @@ export default function Register() {
 
     return (
         <View styles={styles.maincontainer}>
-        <View>
-          <Text style={styles.text}>
-            Sipto will send a verification code by SMS to your mobile
-            number.Carrier charges may apply
-          </Text>
-        </View>
-
-
         <View style={styles.inputView}>
             <TextInput
               style={styles.input}
@@ -76,6 +68,29 @@ export default function Register() {
             />
          </View>
 
+         <View style={styles.inputView}>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              placeholder="Renter your Password"
+              placeholderTextColor="lightgrey"
+              onChangeText={onChangeText}
+              value={text}
+            />
+         </View>
+
+        <View>
+           <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              placeholder="Enter your Password"
+              placeholderTextColor="lightgrey"
+              onChangeText={onChangeText}
+              value={text}
+           
+           />
+
+</View>
         </View>
   );
 }
